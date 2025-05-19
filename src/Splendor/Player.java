@@ -1,4 +1,5 @@
 package Splendor;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Objects;
@@ -19,17 +20,20 @@ public class Player {
 		}
 		this.cards = new ArrayList<>();
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public Map<GemColor, Integer> getTokens() {
 		return tokens;
 	}
+
 	public List<DevelopmentCard> getCards() {
 		return cards;
 	}
 
-	
+
 	//Calcule le nb de points de prestige du joueur
 	//version simplifiée mais après on pourra utilisé un stream je pense
 	public int getPrestigePoints() {
@@ -39,7 +43,7 @@ public class Player {
 		}
 		return prestigePoints;
 	}
-	
+
 	//vérifie si le joueur a au moins 3 jetons (dans notre version simplifiée) de la couleur de la carte à acheter
 	//	on pourrait aussi faire un stream pour ça mais c une version simplifiée
 	public boolean canBuy(DevelopmentCard card) {
@@ -56,7 +60,7 @@ public class Player {
 	//achète une carte (retire 3 jetons de la bonne couleur et ensuite ajt la carte de la collection du joeur)
 	public void buyCard(DevelopmentCard card) {
 		Objects.requireNonNull(card);
-		if(!canBuy(card)) {
+		if (!canBuy(card)) {
 			throw new IllegalArgumentException("pas assez de jetons pour acheter la carte");
 		}
 		//retire 3 jetons de la bonne couleur (pour l'instant dans la version simplifiée)
@@ -71,10 +75,10 @@ public class Player {
 		tokens.put(gemColor, tokens.getOrDefault(gemColor, 0) + 1); //là on fait +1 pour la verison simplifiée
 		//par la suite faudra faire + un montant passé en paramètre
 	}
-	
+
 	@Override
 	public String toString() {
-        return name +  " -> Jetons: " + tokens;
-      //  -> Prestige: " + prestigePoints +
+        return name + " -> Jetons: " + tokens;
+		//  -> Prestige: " + prestigePoints +
 	}
 }

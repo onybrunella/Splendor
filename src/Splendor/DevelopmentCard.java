@@ -14,4 +14,26 @@ public record DevelopmentCard(int level, GemColor bonus, Map<GemColor, Integer> 
 		Objects.requireNonNull(cost);
 		Objects.requireNonNull(bonus);
 	}
+
+	public String[] toCardLines() {
+		String[] lines = new String[6];
+
+		StringBuilder costLine = new StringBuilder();
+		boolean first = true;
+		for (Map.Entry<GemColor, Integer> entry : cost.entrySet()) {
+			if (!first) costLine.append(", ");
+			costLine.append(entry.getValue()).append(" ").append(entry.getKey());
+			first = false;
+		}
+
+		lines[0] = "+------------------+";
+		lines[1] = String.format("| Level: %-8s |", level);
+		lines[2] = String.format("| Bonus : %-8s |", bonus);
+		lines[3] = String.format("| Prestige: %-6s |", prestige);
+		lines[4] = String.format("| Cost : %-9s |", costLine.toString());
+		lines[5] = "+------------------+";
+
+		return lines;
+	}
+
 }
