@@ -2,30 +2,29 @@ package Splendor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TokenBank {
 	private final Map<GemColor, Integer> tokens;
 	public TokenBank() {
 		tokens = new HashMap<>();
+		//initialisation de la banque avec 4 jetons de chaque couleur
 		for(var gemcolor : GemColor.values()) {
 			tokens.put(gemcolor, 4);
 		}
 	}
-	
-	public boolean takeToken(GemColor color) {
-	    int count = tokens.getOrDefault(color, 0);
-	    if (count > 0) {
-	        tokens.put(color, count - 1);
-	        return true;
-	    }
-	    return false;
+
+	public Map<GemColor, Integer> getTokens() {
+		return tokens;
 	}
-	
-	public void returnToken(GemColor color) {
-	    tokens.put(color, tokens.getOrDefault(color, 0) + 1);
-	}
-	
-	public int getCount(GemColor color) {
-	    return tokens.getOrDefault(color, 0);
+
+
+
+	@Override
+	//j'ai fais un stream
+	public String toString() {
+		return "Banque: " + tokens.entrySet().stream()
+				.map(entry -> entry.getKey() + ": " + entry.getValue())
+				.collect(Collectors.joining(", "));
 	}
 }

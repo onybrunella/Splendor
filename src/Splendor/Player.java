@@ -19,41 +19,57 @@ public class Player {
 		}
 		this.cards = new ArrayList<>();
 	}
+	public String getName() {
+		return name;
+	}
+	public Map<GemColor, Integer> getTokens() {
+		return tokens;
+	}
+	public List<DevelopmentCard> getCards() {
+		return cards;
+	}
+
 	
 	//Calcule le nb de points de prestige du joueur
-	//version simplifiée mais après il faudra utilisé un stream je pense
+	//version simplifiée mais après on pourra utilisé un stream je pense
 	public int getPrestigePoints() {
-		var allPoints = 0;
-		for (var card : cards) {
-			allPoints += card.prestige();
+		int prestigePoints = 0;
+		for (DevelopmentCard card : cards) {
+			prestigePoints += card.prestige();
 		}
-		return allPoints;
+		return prestigePoints;
 	}
 	
 	//vérifie si le joueur a au moins 3 jetons (dans notre version simplifiée) de la couleur de la carte à acheter
+	//	on pourrait aussi faire un stream pour ça mais c une version simplifiée
 	public boolean canBuy(DevelopmentCard card) {
-		Objects.requireNonNull(card);
+		Objects.requireNonNull(card); //les requireNonNUll jsp si je dois les garder
 		return tokens.getOrDefault(card.bonus(), 0) >= 3;
 	}
 
-	public int getToken(GemColor gemColor) {
-		Objects.requireNonNull(gemColor);
-		return tokens.getOrDefault(gemColor, 0);
-	}
+//	public int getToken(GemColor gemColor) {
+//		Objects.requireNonNull(gemColor);
+//		return tokens.getOrDefault(gemColor, 0);
+//	}
+
 
 	//achète une carte (retire 3 jetons de la bonne couleur et ensuite ajt la carte de la collection du joeur)
 	public void buyCard(DevelopmentCard card) {
 		Objects.requireNonNull(card);
-		//if (!cards.contains(card)) {
-			//throw new IllegalArgumentException("You don't have this card");
-	//	}
+		if(!canBuy(card)) {
+			throw new IllegalArgumentException("pas assez de jetons pour acheter la carte");
+		}
+		//retire 3 jetons de la bonne couleur (pour l'instant dans la version simplifiée)
 		tokens.put(card.bonus(), tokens.get(card.bonus()) - 3);
+		//ajoute la carte à la collection du joueur
 		cards.add(card);
 	}
 
 	//player prend un jeton de la banque
 	public void takeToken(GemColor gemColor) {
-		tokens.put(gemColor, tokens.getOrDefault(gemColor, 0) + 1);
+		Objects.requireNonNull(gemColor);
+		tokens.put(gemColor, tokens.getOrDefault(gemColor, 0) + 1); //là on fait +1 pour la verison simplifiée
+		//par la suite faudra faire + un montant passé en paramètre
 	}
 	
 	@Override
