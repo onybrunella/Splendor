@@ -1,4 +1,7 @@
-package Splendor;
+package fr.uge.Splendor.view;
+
+import fr.uge.Splendor.cards.DevelopmentCard;
+import fr.uge.Splendor.board.Board;
 
 import java.util.List;
 import java.util.Map;
@@ -11,18 +14,18 @@ public class BoardView {
         System.out.println("=== Board ===");
 
         for (int row = 1; row <= 3; row++) {
-            System.out.println("Line " + row + " :");
+            System.out.println("Ligne " + row + " :");
             List<DevelopmentCard> cards = rows.get(row);
             displayCardRow(cards);
             System.out.println();
         }
 
-        System.out.println("Remaining cards : " + board.getDrawDeck().size());
+        System.out.println("Cartes restantes : " + board.getDrawDeck().size());
     }
 
     public static void displayCardRow(List<DevelopmentCard> cards) {
         if (cards == null || cards.isEmpty()) {
-            System.out.println("(No card)");
+            System.out.println("(Pas de cartes disponibles)");
             return;
         }
 

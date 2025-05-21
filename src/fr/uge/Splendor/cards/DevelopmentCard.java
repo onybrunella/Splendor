@@ -1,7 +1,8 @@
-package Splendor;
-import java.util.HashMap;
+package fr.uge.Splendor.cards;
 import java.util.Map;
 import java.util.Objects;
+
+import fr.uge.Splendor.tokens.GemColor;
 
 public record DevelopmentCard(int level, GemColor bonus, Map<GemColor, Integer> cost, int prestige) {
 	public DevelopmentCard{
@@ -27,10 +28,10 @@ public record DevelopmentCard(int level, GemColor bonus, Map<GemColor, Integer> 
 		}
 
 		lines[0] = "+------------------+";
-		lines[1] = String.format("| Level: %-8s |", level);
+		lines[1] = String.format("| Niveau: %-8s |", level);
 		lines[2] = String.format("| Bonus : %-8s |", bonus);
 		lines[3] = String.format("| Prestige: %-6s |", prestige);
-		lines[4] = String.format("| Cost : %-9s |", costLine.toString());
+		lines[4] = String.format("| Coût : %-9s |", costLine.toString());
 		lines[5] = "+------------------+";
 
 		return lines;

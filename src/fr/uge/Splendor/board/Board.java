@@ -1,10 +1,12 @@
-package Splendor;
+package fr.uge.Splendor.board;
+
+import fr.uge.Splendor.cards.DevelopmentCard;
 
 import java.util.*;
 
 public class Board {
-    private final List<DevelopmentCard> drawDeck;
-    private final Map<Integer, List<DevelopmentCard>> visibleRows;
+    private List<DevelopmentCard> drawDeck;
+    private Map<Integer, List<DevelopmentCard>> visibleRows;
 
     public Board(List<DevelopmentCard> initialDeck) {
         this.drawDeck = new ArrayList<>(initialDeck);
