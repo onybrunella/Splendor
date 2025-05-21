@@ -1,5 +1,5 @@
 package fr.uge.Splendor.view;
-import Splendor.tokens.*;
+import fr.uge.Splendor.tokens.*;
 import fr.uge.Splendor.tokens.GemColor;
 import fr.uge.Splendor.tokens.TokenBank;
 
